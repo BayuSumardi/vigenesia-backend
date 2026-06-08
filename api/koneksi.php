@@ -4,20 +4,20 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-W
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE, PUT");
 header("Content-Type: application/json; charset=UTF-8");
 
-// Menghentikan request OPTIONS preflight agar tidak lanjut ke logika berikutnya
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     http_response_code(200);
     exit();
 }
 
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "vigenesia";
+// Konfigurasi menggunakan Environment Variables dari Railway
+$host = getenv('MYSQLHOST');
+$user = getenv('MYSQLUSER');
+$pass = getenv('MYSQLPASSWORD');
+$db   = getenv('MYSQLDATABASE');
+$port = getenv('MYSQLPORT');
 
-$koneksi = mysqli_connect($host, $user, $pass, $db);
+$koneksi = mysqli_connect($host, $user, $pass, $db, $port);
 
-// Memberikan respon jika terjadi error koneksi database
 if (!$koneksi) {
     echo json_encode(["status" => false, "message" => "Database Connection Failed: " . mysqli_connect_error()]);
     exit();
