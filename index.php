@@ -1,3 +1,3 @@
 <?php
-echo "Server ViGeNesia is Online!";
+echo "Server Visi Generasi Indonesia sedang Online!";
 ?>
