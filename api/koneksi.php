@@ -1,7 +1,8 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, Origin, Accept");
+// Ubah bagian ini menjadi bintang (*) agar semua header Flutter Web diizinkan
+header("Access-Control-Allow-Headers: *");
 
 // Pastikan untuk menangani OPTIONS preflight dengan benar
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
