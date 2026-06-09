@@ -7,5 +7,8 @@ RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 COPY . /usr/src/vigenesia
 WORKDIR /usr/src/vigenesia
 
-# 3. Jalankan PHP built-in server langsung mengikuti PORT dari Railway
-CMD ["sh", "-c", "php -S 0.0.0.0:${PORT}"]
+# 3. Beritahu Railway secara eksplisit bahwa kontainer ini membuka port 8080
+EXPOSE 8080
+
+# 4. Jalankan PHP server langsung di port 8080
+CMD ["php", "-S", "0.0.0.0:8080"]
