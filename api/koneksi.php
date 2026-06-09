@@ -14,8 +14,10 @@ header("Content-Type: application/json; charset=UTF-8");
 $host = getenv('MYSQLHOST');
 $user = getenv('MYSQLUSER');
 $pass = getenv('MYSQLPASSWORD');
-$db   = getenv('MYSQLDATABASE');
 $port = getenv('MYSQLPORT');
+
+// Ganti 'railway' di bawah ini dengan nama database kamu yang ada di DBeaver
+$db   = getenv('MYSQLDATABASE') ?: 'railway';
 
 $koneksi = mysqli_connect($host, $user, $pass, $db, $port);
 
