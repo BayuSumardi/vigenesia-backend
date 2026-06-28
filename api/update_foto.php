@@ -4,6 +4,7 @@ include 'koneksi.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $iduser = $_POST['iduser'] ?? '';
     $foto_base64 = $_POST['foto_profil'] ?? ''; // Menerima teks Base64 dari Flutter/Android
+    $foto_base64 = str_replace(' ', '+', $foto_base64); // Paksa spasi balik jadi plus kembal
 
     if (empty($iduser) || empty($foto_base64)) {
         echo json_encode(["status" => false, "message" => "Data tidak lengkap!"]);
