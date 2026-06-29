@@ -40,9 +40,8 @@ try {
     }
 
     // Eksekusi insert data baru
-    $query = "INSERT INTO user (nama, profesi, email, password, pertanyaan_keamanan, jawaban_keamanan) 
-              VALUES ('$nama', '$profesi', '$email', '$password', '$pertanyaan', '$jawaban')";
-
+    $query = "INSERT INTO user (nama, profesi, email, password, pertanyaan_keamanan, jawaban_keamanan, role_id, tanggal_input) 
+          VALUES ('$nama', '$profesi', '$email', '$password', '$pertanyaan', '$jawaban', 2, NOW())";
     if (mysqli_query($koneksi, $query)) {
         echo json_encode(["status" => true, "message" => "Registrasi berhasil!"]);
     } else {
