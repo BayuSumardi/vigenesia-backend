@@ -36,7 +36,8 @@ if ($has_user_join) {
     if (!empty($iduser)) {
         // Query untuk Visi Saya (dengan filter iduser)
         $iduser = mysqli_real_escape_string($koneksi, $iduser);
-        $query = "SELECT m.*, k.nama_kategori, u.nama AS nama_pembuat 
+        // REVISI: Ditambahkan u.nama AS nama agar sinkron dengan Android tanpa merusak nama_pembuat versi Web
+        $query = "SELECT m.*, k.nama_kategori, u.nama AS nama, u.nama AS nama_pembuat 
                   FROM motivasi m 
                   LEFT JOIN kategori k ON m.id_kategori = k.id_kategori 
                   LEFT JOIN `$table_user` u ON m.iduser = u.iduser
@@ -44,7 +45,8 @@ if ($has_user_join) {
                   ORDER BY m.id DESC";
     } else {
         // Query untuk Explore / Jelajah (tanpa filter iduser untuk menampilkan semua data)
-        $query = "SELECT m.*, k.nama_kategori, u.nama AS nama_pembuat 
+        // REVISI: Ditambahkan u.nama AS nama agar sinkron dengan Android tanpa merusak nama_pembuat versi Web
+        $query = "SELECT m.*, k.nama_kategori, u.nama AS nama, u.nama AS nama_pembuat 
                   FROM motivasi m 
                   LEFT JOIN kategori k ON m.id_kategori = k.id_kategori 
                   LEFT JOIN `$table_user` u ON m.iduser = u.iduser
@@ -72,9 +74,12 @@ $data = [];
 
 if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
-        // Jika tidak ada data JOIN user, set nama_pembuat ke default secara aman
+        // Jika tidak ada data JOIN user, set nama_pembuat & nama ke default secara aman
         if (!isset($row['nama_pembuat'])) {
             $row['nama_pembuat'] = 'Pengguna ViGeNesia';
+        }
+        if (!isset($row['nama'])) {
+            $row['nama'] = 'Pengguna ViGeNesia';
         }
         $data[] = $row;
     }
